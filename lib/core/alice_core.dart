@@ -37,6 +37,9 @@ class AliceCore {
   ///method queue will be used to remove elements.
   final int maxCallsCount;
 
+  ///Flag to show/hide Alice Logger Tab
+  final bool showAliceLogger;
+
   ///Directionality of app. If null then directionality of context will be used.
   final TextDirection? directionality;
 
@@ -63,6 +66,7 @@ class AliceCore {
     required this.darkTheme,
     required this.notificationIcon,
     required this.maxCallsCount,
+    required this.showAliceLogger,
     this.directionality,
     this.showShareButton,
   }) {
@@ -139,7 +143,8 @@ class AliceCore {
       Navigator.push<void>(
         context,
         MaterialPageRoute(
-          builder: (context) => AliceCallsListScreen(this, _aliceLogger),
+          builder: (context) =>
+              AliceCallsListScreen(this, _aliceLogger, showAliceLogger),
         ),
       ).then((onValue) => _isInspectorOpened = false);
     }

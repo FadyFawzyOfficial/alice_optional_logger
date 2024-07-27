@@ -17,8 +17,13 @@ import 'alice_stats_screen.dart';
 class AliceCallsListScreen extends StatefulWidget {
   final AliceCore _aliceCore;
   final AliceLogger? _aliceLogger;
+  final bool _showAliceLogger;
 
-  const AliceCallsListScreen(this._aliceCore, this._aliceLogger);
+  const AliceCallsListScreen(
+    this._aliceCore,
+    this._aliceLogger,
+    this._showAliceLogger,
+  );
 
   @override
   _AliceCallsListScreenState createState() => _AliceCallsListScreenState();
@@ -87,22 +92,26 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen>
           appBar: AppBar(
             title: _searchEnabled ? _buildSearchField() : _buildTitleWidget(),
             actions: _buildActionWidgets(isLoggerTab),
-            bottom: TabBar(
-              controller: _tabController,
-              indicatorColor: AliceConstants.orange,
-              tabs: [
-                for (final item in _tabItems)
-                  Tab(text: item.title.toUpperCase())
-              ],
-            ),
+            bottom: widget._showAliceLogger
+                ? TabBar(
+                    controller: _tabController,
+                    indicatorColor: AliceConstants.orange,
+                    tabs: [
+                      for (final item in _tabItems)
+                        Tab(text: item.title.toUpperCase())
+                    ],
+                  )
+                : null,
           ),
-          body: TabBarView(
-            controller: _tabController,
-            children: [
-              _buildCallsListWrapper(),
-              _buildLogsWidget(),
-            ],
-          ),
+          body: widget._showAliceLogger
+              ? TabBarView(
+                  controller: _tabController,
+                  children: [
+                    _buildCallsListWrapper(),
+                    _buildLogsWidget(),
+                  ],
+                )
+              : _buildCallsListWrapper(),
           floatingActionButton: _buildFloatingActionButton(isLoggerTab),
         ),
       ),

@@ -33,6 +33,9 @@ class Alice {
   ///method queue will be used to remove elements.
   final int maxCallsCount;
 
+  ///Flag to show/hide Alice Logger Tab
+  final bool showAliceLogger;
+
   ///Directionality of app. Directionality of the app will be used if set to null.
   final TextDirection? directionality;
 
@@ -52,6 +55,7 @@ class Alice {
     this.darkTheme = false,
     this.notificationIcon = "@mipmap/ic_launcher",
     this.maxCallsCount = 1000,
+    this.showAliceLogger = false,
     this.directionality,
     this.showShareButton = true,
   }) {
@@ -63,6 +67,7 @@ class Alice {
       darkTheme: darkTheme,
       notificationIcon: notificationIcon,
       maxCallsCount: maxCallsCount,
+      showAliceLogger: showAliceLogger,
       directionality: directionality,
       showShareButton: showShareButton,
     );
